@@ -55,7 +55,7 @@ namespace ReverseMarkdown.Test
                 @"Leave <a href=""http://example.com"">http</a>, <a href=""https://example.com"">https</a>, <a href=""ftp://example.com"">ftp</a>, <a href=""ftps://example.com"">ftps</a>, <a href=""file://example.com"">file</a>. Remove <a href=""data:text/plain;charset=UTF-8;page=21,the%20data:1234,5678"">data</a>, <a href=""tel://example.com"">tel</a> and <a href=""whatever://example.com"">whatever</a>";
             return CheckConversion(html, new Config
             {
-                WhitelistUriSchemes = new[] {"http", "https", "ftp", "ftps", "file"}
+                WhitelistUriSchemes = new[] { "http", "https", "ftp", "ftps", "file" }
             });
         }
 
@@ -66,7 +66,7 @@ namespace ReverseMarkdown.Test
                 html: @"<a href=""example.com"">yeah</a>",
                 config: new Config
                 {
-                    WhitelistUriSchemes = new[] {""}
+                    WhitelistUriSchemes = new[] { "" }
                 }
             );
         }
@@ -78,7 +78,7 @@ namespace ReverseMarkdown.Test
                 html: @"<a href=""example.com"">yeah</a>",
                 config: new Config
                 {
-                    WhitelistUriSchemes = new[] {"whatever"}
+                    WhitelistUriSchemes = new[] { "whatever" }
                 }
             );
         }
@@ -430,7 +430,7 @@ namespace ReverseMarkdown.Test
                 html: @"<img src=""data:image/gif;base64,R0lGODlhEAAQ...""/>",
                 config: new Config
                 {
-                    WhitelistUriSchemes = new[] {"http"}
+                    WhitelistUriSchemes = new[] { "http" }
                 }
             );
         }
@@ -442,7 +442,7 @@ namespace ReverseMarkdown.Test
                 html: @"<img src=""data:image/gif;base64,R0lGODlhEAAQ...""/>",
                 config: new Config()
                 {
-                    WhitelistUriSchemes = new[] {"data"}
+                    WhitelistUriSchemes = new[] { "data" }
                 }
             );
         }
@@ -454,7 +454,7 @@ namespace ReverseMarkdown.Test
                 html: @"<img src=""example.com""/>",
                 config: new Config()
                 {
-                    WhitelistUriSchemes = new[] {""}
+                    WhitelistUriSchemes = new[] { "" }
                 }
             );
         }
@@ -466,7 +466,7 @@ namespace ReverseMarkdown.Test
                 html: @"<img src=""data:image/gif;base64,R0lGODlhEAAQ...""/>",
                 config: new Config()
                 {
-                    WhitelistUriSchemes = new[] {"whatever"}
+                    WhitelistUriSchemes = new[] { "whatever" }
                 }
             );
         }
@@ -478,7 +478,7 @@ namespace ReverseMarkdown.Test
                 html: @"<img src=""/example.gif""/>",
                 config: new Config()
                 {
-                    WhitelistUriSchemes = new[] {"data"}
+                    WhitelistUriSchemes = new[] { "data" }
                 }
             );
         }
@@ -490,7 +490,7 @@ namespace ReverseMarkdown.Test
                 html: @"<img src=""/example.gif""/>",
                 config: new Config()
                 {
-                    WhitelistUriSchemes = new[] {"file"}
+                    WhitelistUriSchemes = new[] { "file" }
                 }
             );
         }
@@ -501,7 +501,7 @@ namespace ReverseMarkdown.Test
             var html = @"<img src=""//example.gif""/>";
             var config = new Config
             {
-                WhitelistUriSchemes = new[] {"http"}
+                WhitelistUriSchemes = new[] { "http" }
             };
             return CheckConversion(html, config);
         }
@@ -524,7 +524,7 @@ namespace ReverseMarkdown.Test
         public Task WhenThereIsEmptyPreTag_ThenConvertToMarkdownPre_GFM()
         {
             var html = "This text has pre tag content <pre><br/ ></pre>Next line of text";
-            return CheckConversion(html, new Config {GithubFlavored = true});
+            return CheckConversion(html, new Config { GithubFlavored = true });
         }
 
         [Fact]
@@ -538,7 +538,7 @@ namespace ReverseMarkdown.Test
         public Task WhenThereIsUnorderedListAndBulletIsAsterisk_ThenConvertToMarkdownList()
         {
             var html = "This text has unordered list.<ul><li>Item1</li><li>Item2</li></ul>";
-            return CheckConversion(html, new Config {ListBulletChar = '*'});
+            return CheckConversion(html, new Config { ListBulletChar = '*' });
         }
 
         [Fact]
@@ -898,7 +898,7 @@ namespace ReverseMarkdown.Test
         public void TestConversionWithPastedHtmlContainingUnicodeSpaces()
         {
             var html =
-                @"<span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"">Markdown Monster is an easy to use and extensible<span> </span></span><strong style=""box-sizing: border-box; font-weight: 600; color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"">Markdown Editor</strong><span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"">,<span> </span></span><strong style=""box-sizing: border-box; font-weight: 600; color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"">Viewer</strong><span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;""><span> </span>and<span> </span></span><strong style=""box-sizing: border-box; font-weight: 600; color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"">Weblog Publisher</strong><span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;""><span> </span>for Windows. Our goal is to provide the best Markdown specific editor for Windows and make it as easy as possible to create Markdown documents. We provide a core editor and previewer, and a number of non-intrusive helpers to help embed content like images, links, tables, code and more into your documents with minimal effort.</span>";
+                @"<span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serxif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"">Markdown Monster is an easy to use and extensible<span> </span></span><strong style=""box-sizing: border-box; font-weight: 600; color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"">Markdown Editor</strong><span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;"">,<span> </span></span><strong style=""box-sizing: border-box; font-weight: 600; color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"">Viewer</strong><span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;""><span> </span>and<span> </span></span><strong style=""box-sizing: border-box; font-weight: 600; color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"">Weblog Publisher</strong><span style=""color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;""><span> </span>for Windows. Our goal is to provide the best Markdown specific editor for Windows and make it as easy as possible to create Markdown documents. We provide a core editor and previewer, and a number of non-intrusive helpers to help embed content like images, links, tables, code and more into your documents with minimal effort.</span>";
 
             var config = new Config
             {
@@ -1126,7 +1126,7 @@ namespace ReverseMarkdown.Test
                 @"This text has image <img alt=""alt"" src=""http://test.com/images/test.png"">. Next line of text";
             var config = new Config
             {
-                PassThroughTags = new[] {"img"}
+                PassThroughTags = new[] { "img" }
             };
             return CheckConversion(html, config);
         }
@@ -1243,6 +1243,11 @@ namespace ReverseMarkdown.Test
         {
             var html =
                 $"<thead>{Environment.NewLine}<tr>{Environment.NewLine}<th style=\"text-align: left;\">Progression</th>{Environment.NewLine}<th style=\"text-align: left;\">Focus</th>{Environment.NewLine}</tr>{Environment.NewLine}</thead>";
+            var converter = new Converter();
+            var expected = converter.Convert(html);
+
+            _testOutputHelper.WriteLine(html);
+            _testOutputHelper.WriteLine(expected);
             return CheckConversion(html);
         }
 
@@ -1304,7 +1309,7 @@ namespace ReverseMarkdown.Test
 
             return CheckConversion(html);
         }
-        
+
         [Fact]
         public Task WhenTableHeadingWithAlignmentStyles_ThenTableHeaderShouldHaveProperAlignment()
         {
@@ -1333,7 +1338,7 @@ namespace ReverseMarkdown.Test
             var html = $"This is the 1<s>st</s> sentence to t<del>e<strike>s</strike></strike>t the strikethrough tag conversion";
             return CheckConversion(html);
         }
-        
+
         [Fact]
         public Task When_Spaces_In_Inline_Tags_Should_Be_Retained()
         {
@@ -1349,6 +1354,19 @@ namespace ReverseMarkdown.Test
             {
                 SuppressDivNewlines = true
             });
+        }
+
+        [Fact]
+        public void Test()
+        {
+            //string html = @"<p><span>The most important interface element is function area in the fluent interface. </span><span>I</span><span>t doesn</span><span>’</span><span>t need to display tool bar, the interface will be more simple and easy, and the drawing area will be </span><span>maximized</span><span>.</span></p><p><span>The Function area contains various function tabs; such as Common, Dimension, Paper, Tools, View etc. All function tabs have command buttons grouped per their functions. These groups are called “option panels” or “panels”. The following figure shows a classic view of a function area with many panels.</span></p><p style='text-align:center;'><img src='http://localhost:8092/HelpDocFilePath/3D/2025/zh-tw/doc/img/rId19.png' /></p><p style='text-align:center;'><span style='font-weight:bold;'>Figure 1-</span><span style='font-weight:bold;'>9</span><span style='font-weight:bold;'> Function Area</span></p><p><span>The figure above shows the “Common” tab containing several panels “Draw”, “Modify”, “Dimension”, “Propeties” etc. Command buttons are there on each panel based on their functions.</span></p><p><span>The Following are few guidelines to use the function area:</span></p><p><span>Every Function tab has a title. The tabs are arranged with their titles placed in a row above the panels. You can switch between tabs by just clicking on th</span><span>e tab title. </span></p><p><span>You can hide or minimize the function tab as needed by double clicking on the title bar, double-click again to restore the tab.</span></p><p><span>Right clicking on any of the interface elements will pop up a menu. You can select to open or close the elemen</span><span>t by selecting the corresponding option from the popup menu.</span></p><p><span>Using the command buttons in the panels is the same as using the commands in the main menu.</span></p><p><span>You can change the interface color by selecting the style in the ‘Style’ option menu in the upper-r</span><span>ight corner of the function area.</span></p><p style='text-indent:2em;'><span>In fluent interface, the most important interface element is Function area, it doesn</span><span>’</span><span>t need to display tool bar, which makes the drawing area be maximized . </span></p>";
+            string html = @"<p style='text-indent:2em;'><span style='color:#auto;font-family:宋体;'>用户可定制界面上显示的内容。在设计环境功能区区、或者设计元素库名称区单击鼠标右键，都可弹出如图所示菜单。</span></p><p style='text-align:center;'><img src='/HelpDocFilePath/3D/2025/zh-tw/doc/img/rId14.png' /></p><p style='text-align:center;'><span style='color:#auto;font-family:楷体_GB2312;'>用户定制界面菜单</span></p><p style='text-indent:2em;'><span style='color:#auto;font-family:宋体;'>“菜单条、功能区、状态条、设计元素库、设计树、智能动画编辑器、智能动画、选择”等前面有勾选或亮显就会显示此项，其余不显示。</span></p><p style='text-indent:2em;'><span style='color:#auto;font-family:宋体;'>勾选“切换用户界面”，或者同时按下Ctrl+Shift+F9，可切换用户界面为老界面。</span></p><p style='text-indent:2em;'><span style='color:#auto;font-family:宋体;'>新界面下，用户可以自己定义界面的颜色，如图所示。</span></p><p style='text-align:center;'><img src='/HelpDocFilePath/3D/2025/zh-tw/doc/img/rId15.png' /><span style='color:#auto;font-family:楷体_GB2312;'> </span></p><p style='text-align:center;'></p><p style='text-align:center;'><span style='color:#auto;font-family:楷体_GB2312;'>自定义界面颜色</span></p><p style='text-indent:2em;'><span style='color:#auto;font-family:宋体;'>如果勾选“隐藏选项卡按钮名称”和“隐藏选项卡名称”，则只剩下图标如图所示。</span></p><p style='text-align:center;'><img src='/HelpDocFilePath/3D/2025/zh-tw/doc/img/rId16.png' /></p>";
+            var converter = new Converter();
+            var expected = converter.Convert(html);
+
+            _testOutputHelper.WriteLine(html);
+            _testOutputHelper.WriteLine(expected);
+            //return CheckConversion(html);
         }
     }
 }

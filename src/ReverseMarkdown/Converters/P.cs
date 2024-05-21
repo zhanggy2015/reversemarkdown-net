@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
 namespace ReverseMarkdown.Converters
@@ -13,10 +14,32 @@ namespace ReverseMarkdown.Converters
 
         public override string Convert(HtmlNode node)
         {
+            var content = TreatChildren(node);
             var indentation = IndentationFor(node);
             var newlineAfter = NewlineAfter(node);
 
-            return $"{indentation}{TreatChildren(node)}{newlineAfter}";
+            var styles = StringUtils.ParseStyle(node.GetAttributeValue("style", ""));
+            string pattern = @"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>";
+
+            if (!Regex.IsMatch(node.InnerHtml, pattern, RegexOptions.Compiled))
+            {
+                styles.TryGetValue("text-indent", out var value);
+                if (!string.IsNullOrEmpty(value))
+                {
+                    content = $"<p style='text-indent:{value};'>{content}</p>";
+                }
+                styles.TryGetValue("text-align", out var align);
+                switch (align?.Trim())
+                {
+                    case "center":
+                        content = $"<center>{content}</center>";
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return $"{indentation}{content}{newlineAfter}";
         }
 
         private static string IndentationFor(HtmlNode node)

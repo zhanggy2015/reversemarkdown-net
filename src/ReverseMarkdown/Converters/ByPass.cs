@@ -9,7 +9,7 @@ namespace ReverseMarkdown.Converters
             Converter.Register("#document", this);
             Converter.Register("html", this);
             Converter.Register("body", this);
-            Converter.Register("span", this);
+            //Converter.Register("span", this);
             Converter.Register("thead", this);
             Converter.Register("tbody", this);
         }
