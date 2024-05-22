@@ -12,24 +12,27 @@ namespace ReverseMarkdown.Converters
         public override string Convert(HtmlNode node)
         {
             var content = TreatChildren(node);
-            var styles = StringUtils.ParseStyle(node.GetAttributeValue("style", ""));
-            styles.TryGetValue("text-align", out var align);
-            switch (align?.Trim())
+            if (!string.IsNullOrEmpty(node.InnerHtml.Trim()))
             {
-                case "center":
-                    content = $"<center>{content}</center>";
-                    break;
-                default:
-                    break;
-            }
-            styles.TryGetValue("font-weight", out var fontWeight);
-            switch (fontWeight)
-            {
-                case "bold":
-                    content = content.EmphasizeContentWhitespaceGuard("**"," ");
-                    break;
-                default:
-                    break;
+                var styles = StringUtils.ParseStyle(node.GetAttributeValue("style", ""));
+                styles.TryGetValue("text-align", out var align);
+                switch (align?.Trim())
+                {
+                    case "center":
+                        content = $"<center>{content}</center>";
+                        break;
+                    default:
+                        break;
+                }
+                styles.TryGetValue("font-weight", out var fontWeight);
+                switch (fontWeight)
+                {
+                    case "bold":
+                        content = content.EmphasizeContentWhitespaceGuard("**", " ");
+                        break;
+                    default:
+                        break;
+                }
             }
             return content;
         }

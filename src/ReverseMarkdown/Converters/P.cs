@@ -21,13 +21,15 @@ namespace ReverseMarkdown.Converters
             var styles = StringUtils.ParseStyle(node.GetAttributeValue("style", ""));
             string pattern = @"<img\b[^<>]*?\bsrc[\s\t\r\n]*=[\s\t\r\n]*[""']?[\s\t\r\n]*(?<imgUrl>[^\s\t\r\n""'<>]*)[^<>]*?/?[\s\t\r\n]*>";
 
-            if (!Regex.IsMatch(node.InnerHtml, pattern, RegexOptions.Compiled))
+            if (!string.IsNullOrEmpty(node.InnerHtml.Trim())
+                &&!Regex.IsMatch(node.InnerHtml, pattern, RegexOptions.Compiled)//图片不能居中
+                &&!content.Contains("**"))//加粗的不能居中
             {
-                styles.TryGetValue("text-indent", out var value);
-                if (!string.IsNullOrEmpty(value))
-                {
-                    content = $"<p style='text-indent:{value};'>{content}</p>";
-                }
+                //styles.TryGetValue("text-indent", out var value);
+                //if (!string.IsNullOrEmpty(value))
+                //{
+                //    content = $"<p style='text-indent:{value};'>{content}</p>";
+                //}
                 styles.TryGetValue("text-align", out var align);
                 switch (align?.Trim())
                 {
