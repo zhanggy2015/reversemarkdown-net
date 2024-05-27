@@ -58,7 +58,7 @@ namespace ReverseMarkdown
             var result = Lookup(root.Name).Convert(root);
 
             // cleanup multiple new lines
-            result = Regex.Replace( result, @"(^\p{Zs}*(\r\n|\n)){2,}", Environment.NewLine, RegexOptions.Multiline);
+            result = Regex.Replace( result, @"(^\p{Zs}*(\r\n|\n)){2,}", "  "+Environment.NewLine, RegexOptions.Multiline);
 
             return result.Trim();
         }
